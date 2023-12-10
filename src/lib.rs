@@ -8,9 +8,9 @@ use std::hash::Hash;
 type HashKey<K> = (K, TypeId);
 type Anything = Box<dyn Any>;
  
-pub struct AnyMap<K: Eq + Hash>(HashMap<HashKey<K>, Anything>);
+pub struct Cacher<K: Eq + Hash>(HashMap<HashKey<K>, Anything>);
  
-impl<K: Eq + Hash> AnyMap<K> {
+impl<K: Eq + Hash> Cacher<K> {
     /// Creates a new hashmap that can store
     /// any data which can be tagged with the
     /// `Any` trait.
@@ -79,7 +79,7 @@ mod test {
  
     #[test]
     fn you_can_add_different_types_and_work_with_them() {
-        let mut storage = AnyMap::new();
+        let mut storage = Cacher::new();
         storage.insert("pie", 3.142);
         storage.insert("pie", "apple");
  
